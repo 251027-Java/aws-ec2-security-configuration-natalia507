@@ -26,12 +26,12 @@ You are deploying a web application that needs:
 ### Task 1: Design Security Group Rules
 Fill in the following table with appropriate values:
 
-| Rule | Type | Protocol | Port | Source | Purpose |
-|------|------|----------|------|--------|---------|
-| 1    | SSH  | TCP      | ?    | ?      | Admin access |
-| 2    | ?    | TCP      | 80   | ?      | Web traffic |
-| 3    | ?    | TCP      | 443  | ?      | Secure web |
-| 4    | Custom TCP | TCP | ?  | 10.0.0.0/8 | Internal API |
+| Rule | Type       | Protocol | Port | Source     | Purpose |
+|------|------------|----------|------|------------|---------|
+| 1    | SSH        | TCP      | 22   | IP         | Admin access |
+| 2    | HTTP       | TCP      | 80   | 0.0.0.0/0  | Web traffic |
+| 3    | HTTPS      | TCP      | 443  | 10.0.0.0/8 | Secure web |
+| 4    | Custom TCP | TCP | 8080 | 10.0.0.0/8 | Internal API |
 
 ### Task 2: Create Security Group (Console)
 1. Navigate to EC2 → Security Groups → Create
@@ -74,11 +74,11 @@ aws ec2 authorize-security-group-ingress \
 ### Task 5: Troubleshooting Exercise
 Given these symptoms, identify the likely cause:
 
-| Symptom | Likely Cause | Solution |
-|---------|--------------|----------|
-| Can't SSH to instance | ? | ? |
-| Website not loading | ? | ? |
-| API calls timing out | ? | ? |
+| Symptom | Likely Cause                | Solution                   |
+|---------|-----------------------------|----------------------------|
+| Can't SSH to instance | Inbound security group      | add an inbound ssh rule    |
+| Website not loading | http or htttp/s not allowed | add http/s inbound rules   |
+| API calls timing out | application port blocked    | allow port 8080 internally |
 
 ## Deliverables
 1. Completed security group rules table (Task 1)
